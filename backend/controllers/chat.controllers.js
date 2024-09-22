@@ -61,4 +61,5 @@ const accessChat = asyncHandler(async(req, res)=>{
       throw new Error(error.message);
     }
   });
+  
 })
