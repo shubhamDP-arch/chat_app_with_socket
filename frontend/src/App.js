@@ -1,13 +1,14 @@
-import logo from './logo.svg';
+
 import './App.css';
-import { Button, ButtonGroup } from '@chakra-ui/react'
 import { Route, Routes } from 'react-router-dom';
 import HomePage from './Pages/Homepage';
+import ChatPage from './Pages/ChatPage';
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/chat" element={<ChatPage />} />
       </Routes>
     </div>
   );
