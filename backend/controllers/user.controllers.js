@@ -11,12 +11,12 @@ const allUsers = asyncHandler(async(req, res)=>{
     ]
   }:{};
   
-  const users = await User.find(keyword)//.find({_id:{$ne: req.user._id}})
+  const users = await User.find(keyword)
   return res.status(200).json(new ApiResponse(201, users, "User data fouund successfully"))
 })
 
 const registerUser = asyncHandler(async(req, res)=>{
-  const {name, email,password} = req.body;
+  const {name, email,password, pic } = req.body;
   console.log(req.body)
   if(!name || !email || !password){
     throw new ApiError(404, "name or email or password not given")
@@ -26,12 +26,14 @@ const registerUser = asyncHandler(async(req, res)=>{
   if(userExists){
     throw new ApiError(400, "User already exists")
   }
-
+  console.log("pic is " +pic)
   const user = await User.create({
     name,
     email,
     password,
+    pic
   })
+  
   if(user){
     return res.status(200).json(new ApiResponse(201, user, "User data created successfully"))
   }
@@ -52,6 +54,7 @@ const authUser = asyncHandler( async (req, res)=>{
   else{
     return ApiError(404, "User not found or password incorrect")
   }
+
 })
 
 export {registerUser, authUser, allUsers}

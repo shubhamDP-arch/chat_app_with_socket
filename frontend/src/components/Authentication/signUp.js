@@ -16,7 +16,7 @@ const SignUp = () =>{
   const [picLoading, setPicLoading] = useState(false);
   const toast = useToast()
   const navigate = useNavigate()
-  const submitHandler = async()=>{
+  const submitHandler = async()=>{ 
     setPicLoading(true);
     if (!name || !email || !password || !confirmpassword){
     toast({
@@ -102,6 +102,7 @@ if (pics.type === "image/jpeg" || pics.type === "image/png") {
   data.append("file", pics);
   data.append("upload_preset", "chat-app");
   data.append("cloud_name", "shubham");
+  console.log("Picuploaded")
   fetch("https://api.cloudinary.com/v1_1/dzfcjy2bx/image/upload", {
     method: "post",
     body: data,
@@ -109,7 +110,7 @@ if (pics.type === "image/jpeg" || pics.type === "image/png") {
   .then((res) => res.json())
   .then((data) => {
     setPic(data.url.toString());
-    console.log(data.url.toString());
+    console.log("Picture" + data.url.toString());
     setPicLoading(false);
   })
   .catch((err) => {
@@ -189,6 +190,7 @@ else {
         width="100%"
         style={{ marginTop: 15 }}
         onClick={submitHandler}
+        isLoading={picLoading}
       >
         Sign Up
       </Button>
